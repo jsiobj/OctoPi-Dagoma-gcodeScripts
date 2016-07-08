@@ -1,0 +1,9 @@
+; gCode Script - "afterPrinterConnected"
+; Printer : Dagoma Discovery 200
+; Software : OctoPrint
+
+G91         ;relative positioning
+G1 Z7       ;move Z up
+G90         ;absolute positioning
+G28 X Y     ;home X Y so extruder is out of the way
+G91         ;relative positioning
