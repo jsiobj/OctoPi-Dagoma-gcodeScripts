@@ -1,0 +1,31 @@
+; gCode Script - "beforePrintStarted" 
+; Printer : Dagoma Discovery 200
+; Software : OctoPrint
+
+G91                   ;relative positioning
+G1 Z7                 ;move Z up
+G90                   ;absolute positioning
+G28 X                 ;home X 
+M109 S210             ;set e temp 220 and wait
+G28 X                 ;home X
+G28 Y                 ;home Y
+G01 X20 Y100          ;moxe
+G28 Z                 ;home Z
+M104 S210             ;set e temp
+G29                   ;detailed Z probe (4 points) 
+G92 Z10               ;set pos
+G91                   ;relative positioning
+G1 Z-0.70             ;Z offset
+G90                   ;absolute positioning
+G92 Z0                ;set pos
+G1 Z3                 ;move Z up
+G1 X100 Y200 F3000    ;move at 3000mm/s
+G1 Z2                 ;move Z up
+M106                  ;fan full power
+M109 S210             ;set e temp 220 and wait
+M82                   ;set extruder to absolute mode
+M107                  ;fan off (not really off thought)
+G92 E0                ;zero extruded length
+G1 F200 E3            ;extrude 3mm of feed stock
+G92 E0                ;zero extruded length again
+G1 F9000              ;9000mm/s
