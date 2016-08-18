@@ -8,6 +8,4 @@ G91                ;relative positioning
 G1 E-1 F300        ;retract the filament a bit before lifting the nozzle, to release some of the pressure
 G1 Z+3 E-2 F9000   ;move Z up a bit and retract filament even more
 G28 X0 Y0          ;move X/Y to min endstops, so the head is out of the way;
-;G4 360000          ;wait for 6 minutes so everything cools down
-;M908               ;stop fan (dagoma specific ?)
 M84                ;shut down motors

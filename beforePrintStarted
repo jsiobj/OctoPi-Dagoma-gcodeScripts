@@ -2,30 +2,45 @@
 ; Printer : Dagoma Discovery 200
 ; Software : OctoPrint
 
+;Init
+G1 F3000              ;set moving speed
 G91                   ;relative positioning
 G1 Z7                 ;move Z up
+
+;Preheat
+M109 S215             ;set extruder temp and wait
+
+; Test
+;G1 E-10 F300
+;G1 E8 F300
+
+;First auto levelling
+G1 F3000              ;set moving speed
 G90                   ;absolute positioning
-G28 X                 ;home X 
-M109 S210             ;set e temp 220 and wait
 G28 X                 ;home X
 G28 Y                 ;home Y
-G01 X20 Y100          ;moxe
+G01 X20 Y100          ;move somewhere above the plate
 G28 Z                 ;home Z
-M104 S210             ;set e temp
 G29                   ;detailed Z probe (4 points) 
+
+;Z offset
 G92 Z10               ;set pos
 G91                   ;relative positioning
-G1 Z-0.70             ;Z offset
+G1 Z-0.45             ;Z offset
 G90                   ;absolute positioning
 G92 Z0                ;set pos
+
 G1 Z3                 ;move Z up
-G1 X100 Y200 F3000    ;move at 3000mm/s
-G1 Z2                 ;move Z up
+G1 X100 Y200          ;move at end of Y, middle of X
+G1 Z2                 ;and move Z up a bit
+
 M106                  ;fan full power
-M109 S210             ;set e temp 220 and wait
+M109 S215             ;set extruder temp and wait
 M82                   ;set extruder to absolute mode
-M107                  ;fan off (not really off thought)
-G92 E0                ;zero extruded length
-G1 F200 E3            ;extrude 3mm of feed stock
-G92 E0                ;zero extruded length again
-G1 F9000              ;9000mm/s
+M107                  ;start with the fan at reduced speed
+G92 E0                ;zero the extruded length
+G1 F200 E3            ;extrude some feed stock
+G92 E0                ;zero the extruded length again
+
+G1 F9000              ;not sure this is usefull...
+
